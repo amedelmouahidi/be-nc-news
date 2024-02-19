@@ -48,3 +48,36 @@ describe("/api", () => {
       });
   });
 });
+describe("/api/articles/:article_id", () => {
+    test("should respond with an article object for the specified article", () => {
+      return request(app)
+        .get("/api/articles/1")
+        .expect(200)
+        .then(({ body: { article } }) => {
+          expect(article).toHaveProperty("author");
+          expect(article).toHaveProperty("title");
+          expect(article).toHaveProperty("article_id");
+          expect(article).toHaveProperty("body");
+          expect(article).toHaveProperty("topic");
+          expect(article).toHaveProperty("created_at");
+          expect(article).toHaveProperty("votes");
+          expect(article).toHaveProperty("article_img_url");
+        });
+    });
+    test("should respond with 400 status code when requesting an invalid ID article", () => {
+      return request(app)
+        .get("/api/articles/monalisa")
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe("Bad request");
+        });
+    });
+    test("should respond with 404 status code when requesting a not existing ID article", () => {
+      return request(app)
+        .get("/api/articles/1503")
+        .expect(404)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe("Not found");
+        });
+    });
+  });
