@@ -31,3 +31,20 @@ describe("Verify error handling functionality", () => {
       });
   });
 });
+describe("/api", () => {
+  test("should return an object describing all the available endpoints on our API", () => {
+    return request(app)
+      .get("/api")
+      .expect(200)
+      .then(({ body: { endpoints } }) => {
+        for (let key in endpoints) {
+          expect(endpoints[key]).toHaveProperty("description");
+          expect(endpoints[key]).toHaveProperty("queries");
+          expect(endpoints[key]).toHaveProperty("exampleResponse");
+          if (["POST", "PATCH", "DELETE"].includes(key)) {
+            expect(endpoints[key]).toHaveProperty("bodyFormat");
+          }
+        }
+      });
+  });
+});
