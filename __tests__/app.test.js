@@ -227,4 +227,61 @@ describe("/api/articles/:article_id/comments", () => {
         });
     });
   });
+  describe("PATCH requests", () => {
+    test("should respond with updated article", () => {
+      return request(app)
+        .patch("/api/articles/1")
+        .send({ inc_votes: 30 })
+        .expect(200)
+        .then(({ body: { article } }) => {
+          expect(article).toMatchObject({
+            author: "butter_bridge",
+            title: "Living in the shadow of a great man",
+            article_id: 1,
+            body: "I find this existence challenging",
+            topic: "mitch",
+            created_at: expect.any(String),
+            votes: 130,
+            article_img_url:
+              "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+          });
+        });
+    });
+    test("should respond with 400 when given invalid article ID", () => {
+      return request(app)
+        .patch("/api/articles/monalisa")
+        .send({ inc_votes: 30 })
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe("Bad request");
+        });
+    });
+    test("should responds with 400 when given request with missing properties", () => {
+      return request(app)
+        .patch("/api/articles/1")
+        .send({})
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe("Bad request");
+        });
+    });
+    test("should respond with 400 when given request with invalid properties", () => {
+      return request(app)
+        .patch("/api/articles/1")
+        .send({ inc_votes: "seventy" })
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe("Bad request");
+        });
+    });
+    test("should respond with 404 when given unexisting article", () => {
+      return request(app)
+        .patch("/api/articles/1797")
+        .send({ inc_votes: 30 })
+        .expect(404)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe("Not found");
+        });
+    });
+  });
 });

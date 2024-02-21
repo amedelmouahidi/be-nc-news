@@ -79,5 +79,20 @@
       "votes": 0,
       "created_at": "2024-02-20T16:19:20.794Z"
     }
+  },
+  "PATCH /api/articles/:article_id": {
+    "description": "updates incremented/decremented votes for given article",
+    "queries": [],
+    "bodyFormat": { "inc_votes": "newVote" },
+    "exampleResponse": {
+      "article_id": 1,
+      "title": "Living in the shadow of a great man",
+      "topic": "mitch",
+      "author": "butter_bridge",
+      "body": "I find this existence challenging",
+      "created_at": "2020-07-09T20:11:00.000Z",
+      "votes": 100,
+      "article_img_url": "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700"
+    }
   }
 }
