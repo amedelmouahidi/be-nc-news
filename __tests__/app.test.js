@@ -160,4 +160,71 @@ describe("/api/articles/:article_id/comments", () => {
         });
     });
   });
+  describe("POST requests", () => {
+    test("should respond with the posted comment", () => {
+      return request(app)
+        .post("/api/articles/1/comments")
+        .send({
+          username: "rogersop",
+          body: "monalisa",
+        })
+        .expect(201)
+        .then(({ body: { comment } }) => {
+          expect(comment).toMatchObject({
+            body: expect.any(String),
+            votes: expect.any(Number),
+            author: expect.any(String),
+            article_id: expect.any(Number),
+            created_at: expect.any(String),
+          });
+        });
+    });
+    test("should responds with 400 when given comment with missing properties", () => {
+      return request(app)
+        .post("/api/articles/5/comments")
+        .send({
+          body: "monalisa",
+        })
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe("Bad request");
+        });
+    });
+    test("should respond with 400 when given comment with invalid properties", () => {
+      return request(app)
+        .post("/api/articles/5/comments")
+        .send({
+          username: "monet",
+          body: 1840,
+        })
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe("Bad request");
+        });
+    });
+    test("should respond with 400 when given invalid article ID", () => {
+      return request(app)
+        .get("/api/articles/seventy/comments")
+        .send({
+          username: "leonardo_davinci",
+          body: "monalisa",
+        })
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe("Bad request");
+        });
+    });
+    test("should respond with 404 when given unexisting article ID", () => {
+      return request(app)
+        .post("/api/articles/1797/comments")
+        .send({
+          username: "leonardo_davinci",
+          body: "monalisa",
+        })
+        .expect(404)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe("Not found");
+        });
+    });
+  });
 });
