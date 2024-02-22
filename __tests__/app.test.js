@@ -206,8 +206,8 @@ describe("/api/articles/:article_id/comments", () => {
       return request(app)
         .get("/api/articles/seventy/comments")
         .send({
-          username: "leonardo_davinci",
-          body: "monalisa",
+          username: "butter_bridge",
+          body: "Oh, I've got compassion running out of my nose, pal! I'm the Sultan of Sentiment!",
         })
         .expect(400)
         .then(({ body: { msg } }) => {
@@ -218,8 +218,8 @@ describe("/api/articles/:article_id/comments", () => {
       return request(app)
         .post("/api/articles/1797/comments")
         .send({
-          username: "leonardo_davinci",
-          body: "monalisa",
+          username: "butter_bridge",
+          body: "Oh, I've got compassion running out of my nose, pal! I'm the Sultan of Sentiment!",
         })
         .expect(404)
         .then(({ body: { msg } }) => {
@@ -278,6 +278,29 @@ describe("/api/articles/:article_id/comments", () => {
       return request(app)
         .patch("/api/articles/1797")
         .send({ inc_votes: 30 })
+        .expect(404)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe("Not found");
+        });
+    });
+  });
+});
+describe("/api/comments/:comment_id", () => {
+  describe("DELETE requests", () => {
+    test("should respond with status 204 and no content", () => {
+      return request(app).delete("/api/comments/1").expect(204);
+    });
+    test("should respond with 400 when given invalid comment ID", () => {
+      return request(app)
+        .delete("/api/comments/monalisa")
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe("Bad request");
+        });
+    });
+    test("should respond with 404 when given unexisting comment ID", () => {
+      return request(app)
+        .delete("/api/comments/1797")
         .expect(404)
         .then(({ body: { msg } }) => {
           expect(msg).toBe("Not found");

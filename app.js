@@ -8,12 +8,13 @@ const {
 } = require("./controllers/articles.controllers");
 const {
   getCommentsByArticleId,
-  postComment
+  postComment,
+  deleteComment
 } = require("./controllers/comments.controllers");
 const {
   serverErrors,
   customErrors,
-  psqlErrors,
+  psqlErrors
 } = require("./controllers/errors.controllers");
 
 const app = express();
@@ -33,6 +34,9 @@ app.get("/api/articles/:article_id/comments", getCommentsByArticleId);
 app.post("/api/articles/:article_id/comments", postComment);
 
 app.patch('/api/articles/:article_id', patchArticle)
+
+app.delete("/api/comments/:comment_id", deleteComment)
+
 
 
 app.all("*", (req, res) => {
