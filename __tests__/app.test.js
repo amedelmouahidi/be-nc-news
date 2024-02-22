@@ -85,7 +85,17 @@ describe("/api/articles/:article_id", () => {
       .get("/api/articles/9")
       .expect(200)
       .then(({ body: { article } }) => {
-        expect(article).toHaveProperty("comment_count", 2);
+        expect(article).toMatchObject({
+          author: expect.any(String),
+          title: expect.any(String),
+          article_id: expect.any(Number),
+          topic: expect.any(String),
+          created_at: expect.any(String),
+          votes: expect.any(Number),
+          body: expect.any(String),
+          article_img_url: expect.any(String),
+          comment_count: expect.any(Number),
+        });
       });
   });
 });
@@ -123,6 +133,9 @@ describe("/api/articles", () => {
         .expect(200)
         .then(({ body: { articles } }) => {
           expect(articles.length).toBe(12);
+          articles.forEach((article) => {
+            expect(article.topic).toBe("mitch");
+          });
         });
     });
     test("should respond with all articles if the query is omitted", () => {
