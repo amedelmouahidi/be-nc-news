@@ -80,6 +80,14 @@ describe("/api/articles/:article_id", () => {
         expect(msg).toBe("Not found");
       });
   });
+  test("should respond with an article object including comment_count property", () => {
+    return request(app)
+      .get("/api/articles/9")
+      .expect(200)
+      .then(({ body: { article } }) => {
+        expect(article).toHaveProperty("comment_count", 2);
+      });
+  });
 });
 describe("/api/articles", () => {
   test("should respond with an array of all articles except body", () => {
@@ -116,7 +124,7 @@ describe("/api/articles", () => {
         .then(({ body: { articles } }) => {
           expect(articles.length).toBe(12);
         });
-    })
+    });
     test("should respond with all articles if the query is omitted", () => {
       return request(app)
         .get("/api/articles")
@@ -134,8 +142,8 @@ describe("/api/articles", () => {
               comment_count: expect.any(Number),
             });
           });
-        })
-    })
+        });
+    });
     test("should respond with 404 when given an invalid topic", () => {
       return request(app)
         .get("/api/articles?topic=monalisa")
@@ -143,8 +151,8 @@ describe("/api/articles", () => {
         .then((response) => {
           expect(response.body.msg).toBe("Not found");
         });
-    })
-  })
+    });
+  });
 });
 describe("/api/articles/:article_id/comments", () => {
   describe("GET requests", () => {
@@ -362,5 +370,3 @@ describe("GET /api/users", () => {
       });
   });
 });
-
-
