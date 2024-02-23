@@ -1,44 +1,73 @@
 # Northcoders News API
 
-## Setup Instructions
+## Hosted Version
 
-### Setting up the Project
+Hosted Version: [NC-NEWS](https://nc-news-i824.onrender.com)
 
-1. **Clone the Repository:**
-git clone <YOUR_CLONED_REPO_URL>
+## Project Overview
 
-2. **Create a New Public GitHub Repository:**
-- Create a new public repository on GitHub without initializing it with a readme, .gitignore, or license.
-- Copy the repository URL.
+The Northcoders News API is a backend service that provides programmatic access to application data. It emulates the functionality of real-world platforms like Reddit, enabling seamless communication with frontend architectures.
 
-3. **Push Code to the New Repository:**
-- Navigate to the cloned local version of the project.
-- Run the following commands:
+We're utilizing `PostgreSQL` for our database and interacting with it through node-postgres in our `Node.js` environment. This setup enables us to build a flexible and reliable backend system that seamlessly integrates with different frontend architectures. The application listens for requests coming from the user's side at different points in the system, known as endpoints. It retrieves the required information from the news database and sends it as a response to fulfill the user's request.
+
+
+## Project Set Up
+
+### Clone the Repository
+
+- Clone the Repository:
+
+`git clone https://github.com/amedelmouahidi/nc-news`
+
+### Install Dependencies
+
+- Navigate to the project directory:
+
+  `cd nc-news`
+
+- Install Dependencies:
+
+  `npm install` 
+
+### Create and connect Databases locally
+
+- Set Up Environment Variables creating two `.env` files in the project's root directory: 
+
+    .env.development
+  
   ```
-  git remote set-url origin <YOUR_NEW_REPO_URL>
-  git branch -M main
-  git push -u origin main
+  PGDATABASE=nc_news
   ```
 
-### Creating the Databases
+    .env.test
 
-1. **Set Up Environment Variables:**
-- You need to create two `.env` files: `.env.test` and `.env.development`.
-- Add `PGDATABASE=` to each file, with the correct database name for that environment (refer to `/db/setup.sql` for the database names).
+  ```
+  PGDATABASE=nc_news_test
+  ```
+
 - Ensure that these `.env` files are listed in `.gitignore` to keep sensitive information secure.
 
-2. **Install Dependencies:**
-- Run `npm install` to install project dependencies.
+### Seed the Databases
 
-### Connecting to Databases Locally
+- Create the databases:
 
-1. **Environment Variable Setup:**
-- After cloning the repository, create `.env.test` and `.env.development` files in the root directory of the project.
-- Add `PGDATABASE=` to each file, specifying the appropriate database names for the test and development environments.
+  `npm run setup-dbs` 
 
-2. **Run the Project:**
-- With the environment variables set up, you can run the project locally and connect to the databases using the specified environment variables.
+- Seed the local databases:  
 
+  `npm run seed` 
+
+
+### Run Tests
+
+- Ensure the project is configured correctly by running tests:
+
+  `npm test` 
+
+### Minimum Version Requirements
+
+- Node.js: v21.4.0 
+- PostgreSQL: v14.10
 
 
 
