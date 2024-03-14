@@ -1,4 +1,4 @@
-const { selectArticleById, selectArticles, updateArticle } = require("../models/articles.models");
+const { selectArticleById, selectArticles, updateArticle, insertArticle, removeArticle, selectArticlesByTopic } = require("../models/articles.models");
 
 exports.getArticleById = (req, res, next) => {
   const { article_id } = req.params;
@@ -10,8 +10,8 @@ exports.getArticleById = (req, res, next) => {
 };
 
 exports.getArticles = (req, res, next) => {
-  const {topic, sort_by, order} = req.query
-  selectArticles(topic, sort_by, order)
+  const { topic, sort_by, order, limit, p} = req.query;
+  selectArticles(topic, sort_by, order, limit, p)
     .then((articles) => {
       res.status(200).send({ articles });
     })
@@ -25,4 +25,37 @@ exports.patchArticle = (req, res, next) => {
     res.status(200).send({article})
   }).catch(next)
 }
+
+exports.postArticle = (req, res, next) => {
+  const { body } = req;
+  insertArticle(body)
+    .then((newArticle) => {
+      const { article_id } = newArticle;
+      return selectArticleById(article_id);
+    })
+    .then((article) => {
+      res.status(201).send({ article });
+    })
+    .catch(next);
+};
+
+exports.deleteArticle = (req, res, next) => {
+  const { article_id } = req.params;
+  removeArticle(article_id)
+    .then(() => {
+      res.status(204).send();
+    })
+    .catch(next);
+};
+
+exports.getArticlesByTopic = (req, res, next) => {
+  const { topic } = req.params;
+  selectArticlesByTopic(topic)
+    .then((articles) => {
+      res.status(200).send({ articles });
+    })
+    .catch(next);
+};
+
+
 

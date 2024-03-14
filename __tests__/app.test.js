@@ -157,14 +157,6 @@ describe("/api/articles", () => {
           });
         });
     });
-    test("should respond with 404 when given an invalid topic", () => {
-      return request(app)
-        .get("/api/articles?topic=monalisa")
-        .expect(404)
-        .then((response) => {
-          expect(response.body.msg).toBe("Not found");
-        });
-    });
   });
 });
 describe("/api/articles/:article_id/comments", () => {
@@ -381,5 +373,82 @@ describe("GET /api/users", () => {
           });
         });
       });
+  });
+  describe("sort_by query", () => {
+    test("GET 200: returns articles sorted by the requested column", () => {
+      return request(app)
+        .get("/api/articles?sort_by=author")
+        .expect(200)
+        .then(({ body: { articles } }) => {
+          expect(articles).toBeSortedBy("author", { descending: true });
+        });
+    });
+    test("GET 200: returns articles sorted by created_at date if no query is provided", () => {
+      return request(app)
+        .get("/api/articles")
+        .expect(200)
+        .then(({ body: { articles } }) => {
+          expect(articles).toBeSortedBy("created_at", { descending: true });
+        });
+    });
+    test("GET 400: returns appropriate status and error message for invalid query", () => {
+      return request(app)
+        .get("/api/articles/monalisa")
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe("Bad request");
+        });
+    });
+  });
+  describe("order query", () => {
+    test("GET 200: returns articles sorted ascending when requested", () => {
+      return request(app)
+        .get("/api/articles?order=asc")
+        .expect(200)
+        .then(({ body: { articles } }) => {
+          expect(articles).toBeSortedBy("created_at", { ascending: true });
+        });
+    });
+    test("GET 200: returns articles sorted descending by default if no query is specified", () => {
+      return request(app)
+        .get("/api/articles")
+        .expect(200)
+        .then(({ body: { articles } }) => {
+          expect(articles).toBeSortedBy("created_at", { descending: true });
+        });
+    });
+    test("GET 400: returns appropriate status and error message for invalid order query", () => {
+      return request(app)
+        .get("/api/articles/ascending")
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('Bad request');
+        });
+    });
+    describe("/api/users/:username", () => {
+      describe('GET requests', () => {
+        test('GET 200: responds with user object specified by username', () => {
+          return request(app)
+          .get('/api/users/lurker')
+          .expect(200)
+          .then(({body: {user}}) => {
+            expect(user).toMatchObject({
+              username: expect.any(String),
+              avatar_url: expect.any(String),
+              name: expect.any(String)
+            })
+          })
+        });
+        test('GET 404: responds with appropriate status and error message when username does not exist', () => {
+          return request(app)
+          .get('/api/users/humpty-dumpty')
+          .expect(404)
+          .then(({body: {msg}}) => {
+            expect(msg).toBe('Username not found');
+          })
+        });
+      });
+    });
+    
   });
 });

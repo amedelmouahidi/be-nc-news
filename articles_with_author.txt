@@ -1,0 +1,41 @@
+ article_id |                                         title                                         |    author    |     created_at      
+------------+---------------------------------------------------------------------------------------+--------------+---------------------
+          1 | Running a Node App                                                                    | jessjelly    | 2020-11-07 06:03:00
+          2 | The Rise Of Thinking Machines: How IBM's Watson Takes On The World                    | jessjelly    | 2020-05-14 01:02:00
+          3 | 22 Amazing open source React projects                                                 | happyamy2016 | 2020-02-29 11:12:00
+          4 | Making sense of Redux                                                                 | jessjelly    | 2020-09-11 21:12:00
+          5 | Please stop worrying about Angular 3                                                  | jessjelly    | 2020-04-21 17:06:00
+          6 | JavaScript’s Apply, Call, and Bind Methods are Essential for JavaScript Professionals | grumpy19     | 2020-11-11 15:09:00
+          7 | Using React Native: One Year Later                                                    | tickle122    | 2020-10-18 01:26:00
+          8 | Express.js: A Server-Side JavaScript Framework                                        | cooljmessy   | 2020-10-05 23:23:00
+          9 | Learn HTML5, CSS3, and Responsive WebSite Design in One Go                            | grumpy19     | 2020-05-26 15:06:00
+         10 | An Introduction to JavaScript Object Notation (JSON) in JavaScript and .NET           | cooljmessy   | 2020-07-02 12:23:00
+         11 | Designing Better JavaScript APIs                                                      | tickle122    | 2020-07-07 00:13:00
+         12 | The battle for Node.js security has only begun                                        | tickle122    | 2020-11-15 13:25:00
+         13 | What does Jose Mourinho's handwriting say about his personality?                      | weegembump   | 2020-07-08 20:25:00
+         14 | Who Will Manage Your Club in 2021?                                                    | happyamy2016 | 2020-06-24 15:14:00
+         15 | Why do England managers keep making the same mistakes?                                | tickle122    | 2020-03-19 00:14:00
+         16 | History of FC Barcelona                                                               | weegembump   | 2020-08-03 00:14:00
+         17 | Which current Premier League manager was the best player?                             | cooljmessy   | 2020-03-19 11:15:00
+         18 | The People Tracking Every Touch, Pass And Tackle in the World Cup                     | grumpy19     | 2020-08-17 15:03:00
+         19 | Who are the most followed clubs and players on Instagram?                             | jessjelly    | 2020-09-13 13:02:00
+         20 | History of Football                                                                   | tickle122    | 2020-03-10 21:05:00
+         21 | Agility Training Drills For Football Players                                          | tickle122    | 2020-10-26 10:05:00
+         22 | Defensive Metrics: Measuring the Intensity of a High Press                            | tickle122    | 2020-04-17 13:10:00
+         23 | Sunday league football                                                                | weegembump   | 2020-03-22 14:25:00
+         24 | Game of talents: management lessons from top football coaches                         | jessjelly    | 2020-07-09 23:14:00
+         25 | Sweet potato & butternut squash soup with lemon & garlic toast                        | weegembump   | 2020-03-11 21:16:00
+         26 | HOW COOKING HAS CHANGED US                                                            | weegembump   | 2020-04-06 01:00:00
+         27 | Thanksgiving Drinks for Everyone                                                      | grumpy19     | 2020-01-24 23:22:00
+         28 | High Altitude Cooking                                                                 | happyamy2016 | 2020-01-04 00:24:00
+         29 | A BRIEF HISTORY OF FOOD—NO BIG DEAL                                                   | tickle122    | 2020-01-06 20:12:00
+         30 | Twice-Baked Butternut Squash Is the Thanksgiving Side Dish of Your Dreams             | jessjelly    | 2020-01-11 20:20:00
+         31 | What to Cook This Week                                                                | tickle122    | 2020-06-09 03:19:00
+         32 | Halal food: Keeping pure and true                                                     | grumpy19     | 2020-06-18 21:08:00
+         33 | Seafood substitutions are increasing                                                  | weegembump   | 2020-09-16 17:26:00
+         34 | The Notorious MSG’s Unlikely Formula For Success                                      | grumpy19     | 2020-11-22 11:13:00
+         35 | Stone Soup                                                                            | cooljmessy   | 2020-05-26 07:25:00
+         36 | The vegan carnivore?                                                                  | tickle122    | 2020-03-09 21:21:00
+         37 | TenHag the man!                                                                       | weegembump   | 2020-03-22 14:25:00
+(37 rows)
+

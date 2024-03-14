@@ -11,9 +11,25 @@
       "topics": [{ "slug": "football", "description": "Footie!" }]
     }
   },
+  "GET /api/topics/:topic": {
+    "description": "serves an array of all articles for associated topic",
+    "queries": [],
+    "exampleResponse": [
+    {
+    "article_id": 5,
+    "title": "UNCOVERED: catspiracy to bring down democracy",
+    "topic": "cats",
+    "author": "rogersop",
+    "body": "Bastet walks amongst us, and the cats are taking arms!",
+    "created_at": "2020-08-03T13:14:00.000Z",
+    "votes": 0,
+    "article_img_url": "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700"
+    }
+    ]
+    },
   "GET /api/articles": {
     "description": "serves an array of all articles",
-    "queries": ["author", "topic", "sort_by", "order"],
+    "queries": ["topic", "sort_by", "order"],
     "exampleResponse": {
       "articles": [
         {
@@ -39,7 +55,8 @@
       "body": "I find this existence challenging",
       "created_at": "2020-07-09T21:11:00.000Z",
       "votes": 100,
-      "article_img_url": "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700"
+      "article_img_url": "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+      "comment_count": 3
     }
   },
   "GET /api/articles/:article_id/comments": {
@@ -94,5 +111,11 @@
       "votes": 100,
       "article_img_url": "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700"
     }
-  }
+  },
+"DELETE /api/comments/:comment_id": {
+  "description": "deletes a comment",
+  "queries": [],
+  "bodyFormat": {},
+  "exampleResponse": {}
+}
 }

@@ -1,13 +1,16 @@
 const db = require("../db/connection");
 
-exports.selectCommentsByArticleId = (articleId) => {
+exports.selectCommentsByArticleId = (articleId, limit=10, page=1) => {
+  const offset = (page-1)*limit
   return db
-    .query(
-      `SELECT * FROM comments 
-      WHERE article_id = $1 
-      ORDER BY created_at DESC`,
-      [articleId]
-    )
+  .query(
+    `SELECT * FROM comments 
+    WHERE article_id = $1 
+    ORDER BY created_at DESC
+    LIMIT $2
+    OFFSET $3`,
+    [articleId, limit, offset]
+  )
     .then(({ rows }) => {
       return rows;
     });
@@ -44,3 +47,5 @@ exports.removeComment = (commentId) => {
       }
     });
 };
+
+
